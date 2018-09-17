@@ -170,4 +170,40 @@ public class WubookService {
 
     }
 
+    public void updatePrice(String st_date,Double price,Long roomId){
+        try {
+
+            XmlRpcClientConfigImpl xmlConfig = new XmlRpcClientConfigImpl();
+            xmlConfig.setServerURL(new URL(URL));
+            XmlRpcClient client = new XmlRpcClient();
+
+            client.setConfig(xmlConfig);
+
+            Vector params = new Vector();
+           // update_plan_prices(token, lcode, pid, dfrom, prices)¶
+
+
+            params.addElement(this.getCurrentToken());
+            params.addElement(LCODE);
+            params.addElement(9845);
+            params.addElement(st_date);
+
+            HashMap<String,Double[]> room_prices = new HashMap<>();
+
+            Double[] prices = {price};
+            room_prices.put(roomId.toString(),prices);
+
+
+            params.addElement(room_prices);
+
+            Object[] result = (Object[]) client.execute("update_plan_prices", params);
+
+            System.out.println(result);
+
+        } catch (Exception exception) {
+            System.err.println("JavaClient: " + exception);
+        }
+
+    }
+
 }
