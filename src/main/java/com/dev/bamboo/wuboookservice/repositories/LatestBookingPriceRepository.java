@@ -1,6 +1,7 @@
 package com.dev.bamboo.wuboookservice.repositories;
 
 import com.dev.bamboo.wuboookservice.domains.AggregatedPriceInfoResult;
+import com.dev.bamboo.wuboookservice.domains.Hotel;
 import com.dev.bamboo.wuboookservice.domains.LatestBookingPrice;
 import com.dev.bamboo.wuboookservice.domains.RoomDayPrice;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -28,9 +29,19 @@ public interface LatestBookingPriceRepository extends JpaRepository<LatestBookin
 
     @Query("SELECT new com.dev.bamboo.wuboookservice.domains.AggregatedPriceInfoResult(" +
             " AVG(price)," +
-            " MIN(price),"+
-            " MAX(price)," +
+            " MAX(price),"+
+            " MIN(price)," +
             " date )" +
-            " FROM LatestBookingPrice WHERE occupancy= ?1 and date between ?2 and ?3 group by date")
+            " FROM LatestBookingPrice WHERE price is not null and  occupancy= ?1 and date between ?2 and ?3  group by date order by date")
     List<AggregatedPriceInfoResult> getAggregateByOccupancyAndDays(Integer occupancy,Date start,Date end);
-}
+
+    @Query("SELECT new com.dev.bamboo.wuboookservice.domains.AggregatedPriceInfoResult(" +
+            " AVG(price)," +
+            " MAX(price),"+
+            " MIN(price)," +
+            " date )" +
+            " FROM LatestBookingPrice WHERE  price is not null and occupancy= ?1 and date between ?2 and ?3 and hotel_id= ?4 and room_name= ?5  group by date order by date")
+    List<AggregatedPriceInfoResult> getAggregateByOccupancyAndDaysAndHotelId(Integer occupancy,Date start,Date end,Long hotel_id,String roomName);
+
+    void removeAllByHotel(Hotel h);
+ }

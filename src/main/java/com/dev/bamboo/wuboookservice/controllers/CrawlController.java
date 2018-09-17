@@ -5,6 +5,7 @@ import com.dev.bamboo.wuboookservice.repositories.HotelRepository;
 import com.dev.bamboo.wuboookservice.repositories.LatestBookingPriceRepository;
 import com.dev.bamboo.wuboookservice.repositories.RoomDayPriceRepository;
 import com.dev.bamboo.wuboookservice.services.BookingCrawler;
+import org.apache.tomcat.jni.Time;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -154,12 +155,17 @@ public class CrawlController {
             price.setOccupancy(roomDayPrice.getOccupancy());
             price.setHotel(roomDayPrice.getHotel());
             price.setRoomName(roomDayPrice.getRoomName());
+            price.setUpdate_time(new Date());
 
         }else{
-            price.setPrice(roomDayPrice.getPrice());
+
+
+            if(price.getPrice() != null && price.getPrice() > roomDayPrice.getPrice()){
+                price.setPrice(roomDayPrice.getPrice());
+                price.setUpdate_time(new Date());
+            }
         }
 
-        price.setUpdate_time(new Date());
 
         latestBookingPriceRepository.save(price);
 

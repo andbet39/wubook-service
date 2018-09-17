@@ -47,7 +47,7 @@ public class WubookService {
 
             client.setConfig(xmlConfig);
 
-            Vector params = new Vector();
+            Vector<String> params = new Vector<>();
 
             params.addElement(this.getCurrentToken());
             params.addElement(LCODE);
@@ -88,7 +88,7 @@ public class WubookService {
 
             client.setConfig(xmlConfig);
 
-            Vector params = new Vector();
+            Vector<String> params = new Vector<>();
 
             params.addElement(USERNAME);
             params.addElement(PASSWORD);
@@ -115,16 +115,13 @@ public class WubookService {
 
             client.setConfig(xmlConfig);
 
-            Vector params = new Vector();
+            Vector<String> params = new Vector<>();
 
 
             params.addElement(this.getCurrentToken());
             params.addElement(LCODE);
 
-
-            Object[] result = (Object[]) client.execute("get_pricing_plans", params);
-
-            return result;
+            return  (Object[]) client.execute("get_pricing_plans", params);
 
         } catch (Exception exception) {
             System.err.println("JavaClient: " + exception);
@@ -142,7 +139,7 @@ public class WubookService {
 
             client.setConfig(xmlConfig);
 
-            Vector params = new Vector();
+            Vector<java.io.Serializable> params = new Vector<java.io.Serializable>();
             //fetch_plan_prices(token, lcode, pid, dfrom, dto[, rooms= []])
 
 
@@ -154,7 +151,7 @@ public class WubookService {
 
             Object[] result = (Object[]) client.execute("fetch_plan_prices", params);
 
-            HashMap<String,Object[]> prices = (HashMap)result[1];
+            HashMap<String,Object[]> prices = (HashMap<String, Object[]>)result[1];
 
             if ( prices.get(roomId.toString()).length>0){
                 return (Double) prices.get(roomId.toString())[0];
@@ -179,7 +176,7 @@ public class WubookService {
 
             client.setConfig(xmlConfig);
 
-            Vector params = new Vector();
+            Vector<java.io.Serializable> params = new Vector<java.io.Serializable>();
            // update_plan_prices(token, lcode, pid, dfrom, prices)¶
 
 
@@ -198,7 +195,7 @@ public class WubookService {
 
             Object[] result = (Object[]) client.execute("update_plan_prices", params);
 
-            System.out.println(result);
+            System.out.println(result[1]);
 
         } catch (Exception exception) {
             System.err.println("JavaClient: " + exception);
