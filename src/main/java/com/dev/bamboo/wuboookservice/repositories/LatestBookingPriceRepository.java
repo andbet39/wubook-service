@@ -43,5 +43,5 @@ public interface LatestBookingPriceRepository extends JpaRepository<LatestBookin
             " FROM LatestBookingPrice WHERE  price is not null and occupancy= ?1 and date between ?2 and ?3 and hotel_id= ?4 and room_name= ?5  group by date order by date")
     List<AggregatedPriceInfoResult> getAggregateByOccupancyAndDaysAndHotelId(Integer occupancy,Date start,Date end,Long hotel_id,String roomName);
 
-    void removeAllByHotel(Hotel h);
+    List<LatestBookingPrice> getAllByHotelAndDate(Hotel hotel,Date date);
  }

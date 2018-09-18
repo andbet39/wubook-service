@@ -3,11 +3,14 @@ package com.dev.bamboo.wuboookservice.domains;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
 public class Room {
 
-
+    @Id
     private Long id;// the id of the room (what else?)
+
     private String name;// the main name of the room.
     private String shortname;// the room shortname;// unique (per property)
     private Integer occupancy;// the room occupancy

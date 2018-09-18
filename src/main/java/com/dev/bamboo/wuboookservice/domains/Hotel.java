@@ -18,6 +18,9 @@ public class Hotel {
     private String address;
     private String baseUrl;
 
+    private boolean reference;
+
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "hotel")
     private List<RoomDayPrice> roomDayPriceList;
 
@@ -67,5 +70,13 @@ public class Hotel {
 
     public void setRoomDayPriceList(List<RoomDayPrice> roomDayPriceList) {
         this.roomDayPriceList = roomDayPriceList;
+    }
+
+    public boolean isReference() {
+        return reference;
+    }
+
+    public void setReference(boolean reference) {
+        this.reference = reference;
     }
 }

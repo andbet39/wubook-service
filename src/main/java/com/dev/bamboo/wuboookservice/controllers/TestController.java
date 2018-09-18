@@ -4,6 +4,7 @@ package com.dev.bamboo.wuboookservice.controllers;
 import com.dev.bamboo.wuboookservice.domains.AggregatedPriceInfoResult;
 import com.dev.bamboo.wuboookservice.domains.Room;
 import com.dev.bamboo.wuboookservice.repositories.LatestBookingPriceRepository;
+import com.dev.bamboo.wuboookservice.repositories.RoomRepository;
 import com.dev.bamboo.wuboookservice.services.WubookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.support.incrementer.HsqlMaxValueIncrementer;
@@ -30,6 +31,8 @@ public class TestController {
     @Autowired
     LatestBookingPriceRepository latestBookingPriceRepository;
 
+    @Autowired
+    RoomRepository roomRepository;
 
     @GetMapping("/testagg")
     public String testAverage() throws ParseException {
@@ -71,8 +74,13 @@ public class TestController {
     @GetMapping("/getrooms")
     public ArrayList<Room> getRooms() {
 
+        ArrayList<Room> rooms = wubookService.fetchRoom();
 
-        return  wubookService.fetchRoom();
+        for (Room room:rooms){
+            roomRepository.save(room);
+        }
+
+        return  rooms;
 
     }
 

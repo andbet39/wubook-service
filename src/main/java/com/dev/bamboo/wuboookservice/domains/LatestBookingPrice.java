@@ -28,7 +28,7 @@ public class LatestBookingPrice {
 
     Date update_time;
 
-
+    boolean updated;
 
     public Long getId() {
         return id;
@@ -101,5 +101,13 @@ public class LatestBookingPrice {
 
     public void setUpdate_time(Date update_time) {
         this.update_time = update_time;
+    }
+
+    public boolean isUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(boolean updated) {
+        this.updated = updated;
     }
 }
