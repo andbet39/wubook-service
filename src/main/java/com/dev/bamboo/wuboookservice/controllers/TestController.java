@@ -7,7 +7,6 @@ import com.dev.bamboo.wuboookservice.repositories.LatestBookingPriceRepository;
 import com.dev.bamboo.wuboookservice.repositories.RoomRepository;
 import com.dev.bamboo.wuboookservice.services.WubookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.support.incrementer.HsqlMaxValueIncrementer;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -63,7 +62,7 @@ public class TestController {
         List<AggregatedPriceInfoResult> other =
                 latestBookingPriceRepository.getAggregateByOccupancyAndDays(2,date,end);
         List<AggregatedPriceInfoResult> bamboo =
-                latestBookingPriceRepository.getAggregateByOccupancyAndDaysAndHotelId(2,date,end,263L,"Double Room");
+                latestBookingPriceRepository.getAggregateByOccupancyAndDaysAndHotelIdAndRoomName(2,date,end,263L,"Double Room");
 
 
         return calculateDiffs(bamboo,other);
@@ -118,7 +117,7 @@ public class TestController {
 
 
         List<AggregatedPriceInfoResult> other = latestBookingPriceRepository.getAggregateByOccupancyAndDays(2,startDate,endDate);
-        List<AggregatedPriceInfoResult> bamboo = latestBookingPriceRepository.getAggregateByOccupancyAndDaysAndHotelId(2,startDate,endDate,263L,"Double Room");
+        List<AggregatedPriceInfoResult> bamboo = latestBookingPriceRepository.getAggregateByOccupancyAndDaysAndHotelIdAndRoomName(2,startDate,endDate,263L,"Double Room");
 
         HashMap<Date,Float> diffs = calculateDiffs(bamboo,other);
 

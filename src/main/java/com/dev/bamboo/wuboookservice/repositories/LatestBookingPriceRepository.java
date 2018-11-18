@@ -41,7 +41,16 @@ public interface LatestBookingPriceRepository extends JpaRepository<LatestBookin
             " MIN(price)," +
             " date )" +
             " FROM LatestBookingPrice WHERE  price is not null and occupancy= ?1 and date between ?2 and ?3 and hotel_id= ?4 and room_name= ?5  group by date order by date")
-    List<AggregatedPriceInfoResult> getAggregateByOccupancyAndDaysAndHotelId(Integer occupancy,Date start,Date end,Long hotel_id,String roomName);
+    List<AggregatedPriceInfoResult> getAggregateByOccupancyAndDaysAndHotelIdAndRoomName(Integer occupancy,Date start,Date end,Long hotel_id,String roomName);
+
+
+    @Query("SELECT new com.dev.bamboo.wuboookservice.domains.AggregatedPriceInfoResult(" +
+            " AVG(price)," +
+            " MAX(price),"+
+            " MIN(price)," +
+            " date )" +
+            " FROM LatestBookingPrice WHERE  price is not null and occupancy= ?1 and date between ?2 and ?3 and hotel_id= ?4    group by date order by date")
+    List<AggregatedPriceInfoResult> getAggregateByOccupancyAndDaysAndHotelId(Integer occupancy,Date start,Date end,Long hotel_id );
 
     List<LatestBookingPrice> getAllByHotelAndDate(Hotel hotel,Date date);
  }

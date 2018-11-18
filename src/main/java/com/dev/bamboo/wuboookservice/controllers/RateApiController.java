@@ -29,7 +29,7 @@ public class RateApiController {
 
 
     @GetMapping("/getlowests")
-    public Map<String,List<RoomDayPrice>> getLowestByDateOccupancy(@RequestParam("occupancy") Integer occupancy,
+    public Map<String,List<RoomDayPrice>> getLowestByDateOccupancy(@RequestParam("occpancy") Integer occupancy,
                                                                    @RequestParam("checkin") String checkin,
                                                                    @RequestParam("days")Integer days) throws Exception {
 
@@ -74,8 +74,8 @@ public class RateApiController {
 
     @GetMapping("/getlowest")
     public RoomDayPrice getLowestByDateOccupancyandHotel(@RequestParam("occupancy") Integer occupancy,
-                                                                 @RequestParam("checkin") String checkin,
-                                                                 @RequestParam("hotel_id")Long hotel_id) throws Exception {
+                                                         @RequestParam("checkin") String checkin,
+                                                         @RequestParam("hotel_id")Long hotel_id) throws Exception {
         SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
 
 
