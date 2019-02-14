@@ -29,7 +29,7 @@ public class RateApiController {
 
 
     @GetMapping("/getlowests")
-    public Map<String,List<RoomDayPrice>> getLowestByDateOccupancy(@RequestParam("occpancy") Integer occupancy,
+    public Map<String,List<RoomDayPrice>> getLowestByDateOccupancy(@RequestParam("occupancy") Integer occupancy,
                                                                    @RequestParam("checkin") String checkin,
                                                                    @RequestParam("days")Integer days) throws Exception {
 

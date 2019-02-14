@@ -138,7 +138,7 @@ public class TestController {
 
             System.out.println("Current : "+current_price.toString()+" Diff :" + diffs.get(dt).toString()+"  - NewPrice for : " +txt_date +" is " + newPrice.toString());
 
-            wubookService.updatePrice(txt_date,newPrice,39594L);
+            //wubookService.updatePrice(txt_date,newPrice,39594L);
             idx++;
         }
 
